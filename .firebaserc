@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "feedback-network-ts": {
+      "hosting": {
+        "feedback-network": [
+          "feedback-network-ts"
+        ]
+      }
+    }
+  }
+}
