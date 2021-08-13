@@ -1,0 +1,42 @@
+<!-- <mat-card>
+    <mat-card-header>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+        <mat-card-subtitle> {{ post.author }} </mat-card-subtitle>
+        <mat-card-title>{{ post.title }}</mat-card-title>
+        <p>
+        {{ post.body }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+</mat-card> -->
+
+<mat-card class="post">
+    <div class="postVoteCol">
+        <!-- Circle Arrow -->
+        <button mat-icon-button (click)="this.toggleVote(1)"><mat-icon>{{ (vote == 1) ? "arrow_circle_up" : "arrow_upward"}}</mat-icon></button> 
+        <!-- Colored Arrow -->
+        <!-- <button mat-icon-button (click)="vote = (vote == 1) ? 0 : 1"><mat-icon [color]="(vote == 1) ? 'primary' : null">arrow_upward</mat-icon></button>  -->
+        <!-- Colored thumbs -->
+        <!-- <button mat-icon-button (click)="vote = (vote == 1) ? 0 : 1"><mat-icon [color]="(vote == 1) ? 'primary' : null">thumb_up</mat-icon></button>  -->
+        
+        <span> {{ post.votes }} </span>
+        
+        <!-- Circle Arrow -->
+        <button mat-icon-button (click)="this.toggleVote(-1)"><mat-icon>{{ (vote == -1) ? "arrow_circle_down" : "arrow_downward"}}</mat-icon></button> 
+        <!-- Colored Arrow -->
+        <!-- <button mat-icon-button (click)="vote = (vote == -1) ? 0 : -1"><mat-icon [color]="(vote == -1) ? 'primary' : null">arrow_downward</mat-icon></button>  -->
+        <!-- Colored thumbs -->
+        <!-- <button mat-icon-button (click)="vote = (vote == -1) ? 0 : -1"><mat-icon [color]="(vote == -1) ? 'primary' : null">thumb_down</mat-icon></button>  -->
+    </div>
+    <mat-card-content class="postContent">
+        <mat-card-title>{{ post.title }} </mat-card-title>
+        <p> {{ post.body }} </p>
+        <!-- Vote: {{ vote }} -->
+    </mat-card-content>
+</mat-card>
+

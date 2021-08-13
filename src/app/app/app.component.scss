@@ -1,0 +1,12 @@
+.container {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+}
+
+.centeringDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

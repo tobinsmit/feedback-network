@@ -1,0 +1,37 @@
+<!-- Toolbar -->
+<mat-toolbar>
+    <!-- <button mat-icon-button aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button> -->
+    <span>Feedback Network - MTRN</span>
+    <span style="flex: 1 1 auto;"></span>
+    <!-- <button mat-icon-button class="favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+    </button> -->
+
+    <!-- Log in/out -->
+    <ng-container *ngIf="auth.authenticated; else loginButton">
+        <span style="margin-right: 15px;">Hi {{ auth.currentUserDisplayName }}</span>
+        <button mat-stroked-button color="primary" (click)="auth.signOut()">Sign Out</button>
+        <!-- <button mat-icon-button matTooltip="Sign Out" matTooltipPosition="below" (click)="auth.signOut()">
+            <mat-icon>logout</mat-icon>
+        </button> -->
+    </ng-container>
+    <ng-template #loginButton>
+        <!-- <button mat-flat-button color="primary" (click)="auth.microsoftSignIn()">Microsoft Sign In</button> -->
+        <button mat-stroked-button color="primary" (click)="auth.googleSignIn()"><i class="fa fa-google" style="margin-top: -2px;"> </i> Sign In</button>
+    </ng-template>
+</mat-toolbar>
+
+<div class="container">
+    <div class="centeringDiv">
+        <button mat-flat-button color="primary" (click)="openDialog()">New post</button>
+    </div>
+
+    {{ {animal, name} | json }}
+    
+    <app-course></app-course>
+</div>
+
+
+

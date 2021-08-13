@@ -1,0 +1,28 @@
+.post {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    padding: 0 0 0 0;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.postVoteCol {
+    width: 50px;
+    padding-top: 5px;
+    padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F6F7F9;
+}
+
+.postContent {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
