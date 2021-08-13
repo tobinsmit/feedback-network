@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AuthService } from '../services/auth.service'
 
+import firebase from 'firebase/app'
+import { AngularFirestore } from '@angular/fire/firestore'
+
+import { AuthService } from '../services/auth.service'
 import { NewPostDialogComponent } from '../new-post-dialog/new-post-dialog.component'
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { NewPostData } from '../new-post-dialog/new-post-data.model'
+import { Post } from '../post.model';
+
+// import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +22,8 @@ export class AppComponent {
 
   constructor (
     public auth: AuthService,
-    public dialog: MatDialog
+    private dialog: MatDialog,
+    private afs: AngularFirestore,
   ) {
     
   }
@@ -29,9 +36,23 @@ export class AppComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log("result", result)
-      this.animal = result;
+      const postData: NewPostData = result;
+
+      if (postData != null && (postData.body != null || postData.title != null)) {
+        // Post to database
+        const newPost: Post = {
+          approved: null,
+          authorUid: this.auth.currentUserId,
+          authorDisplayName: this.auth.currentUserDisplayName,
+          body: postData.body,
+          postedTime: firebase.firestore.FieldValue.serverTimestamp(),
+          title: postData.title,
+          voters: {},
+          votes: 0
+        }
+
+        const result = this.afs.collection('MtrnPosts').add(newPost)
+      }
     });
   }
 

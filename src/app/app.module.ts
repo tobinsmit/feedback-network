@@ -1,14 +1,19 @@
+// Angular
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 
+// Angular Firebase
 import { AngularFireModule } from '@angular/fire'
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 
+// Imported modules
 import { MyMaterialModule } from './material/material.module'
+import { MomentModule } from 'ngx-moment';
 
+// Components
 import { AppComponent } from './app/app.component';
 import { environment } from 'src/environments/environment';
 import { PostComponent } from './post/post.component';
@@ -46,6 +51,7 @@ import { NewPostDialogComponent } from './new-post-dialog/new-post-dialog.compon
     AngularFireAuthModule,
     AngularFirestoreModule,
     MyMaterialModule,
+    MomentModule,
     // ReactiveFormsModule,
     // MatGridListModule,
     // MatCardModule,

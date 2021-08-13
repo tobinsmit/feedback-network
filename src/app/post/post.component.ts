@@ -12,26 +12,37 @@ import { AuthService } from '../services/auth.service'
 export class PostComponent implements OnInit {
   @Input() post: any;
 
-  vote: number = 0;
-
   constructor(
-    private auth: AuthService,
-    private afs: AngularFirestore) {
-
+    public auth: AuthService,
+    private afs: AngularFirestore
+  ) {
   }
 
   ngOnInit(): void {
-    this.vote = this.post.voters[this.auth.currentUserId]
+  }
+
+  get userVote(): number {
+    return (this.auth.currentUserId in this.post.voters) ? this.post.voters[this.auth.currentUserId] : 0
+  }
+
+  replaceNewLinesWithBreaks(value: string) : string {
+    if (typeof(value) == "string" && value.length > 0) {
+      return value.replace(/\n/g, '<br>');
+    } else {
+      return value
+    }
   }
 
   toggleVote(toggleVote: number) {
-    const oldVote: number = this.vote
-    const newVote: number = (oldVote != toggleVote) ? toggleVote : 0
-    console.log(oldVote, toggleVote, newVote)
-    this.vote = newVote
-    const votersId: string = "voters." + this.auth.currentUserId
-    // var data = {(votersId), newVote}
-    this.afs.doc("MtrnPosts/" + this.post.id).update({[votersId]: newVote, votes:  firebase.firestore.FieldValue.increment(newVote-oldVote)})
+    if (this.post.id != null) {
+      const oldVote: number = this.userVote
+      const newVote: number = (oldVote != toggleVote) ? toggleVote : 0
+      var data = {
+        ["voters." + this.auth.currentUserId]: newVote, 
+        votes: firebase.firestore.FieldValue.increment(newVote-oldVote)
+      }
+      this.afs.doc("MtrnPosts/" + this.post.id).update(data)  
+    }
   }
 
 }

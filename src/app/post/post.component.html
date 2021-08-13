@@ -18,25 +18,35 @@
 <mat-card class="post">
     <div class="postVoteCol">
         <!-- Circle Arrow -->
-        <button mat-icon-button (click)="this.toggleVote(1)"><mat-icon>{{ (vote == 1) ? "arrow_circle_up" : "arrow_upward"}}</mat-icon></button> 
+        <button mat-icon-button (click)="this.toggleVote(1)">
+            <mat-icon>{{ (userVote == 1) ? "arrow_circle_up" : "arrow_upward"}}</mat-icon>
+        </button>
         <!-- Colored Arrow -->
-        <!-- <button mat-icon-button (click)="vote = (vote == 1) ? 0 : 1"><mat-icon [color]="(vote == 1) ? 'primary' : null">arrow_upward</mat-icon></button>  -->
+        <!-- <button mat-icon-button (click)="vote = (userVote == 1) ? 0 : 1"><mat-icon [color]="(userVote == 1) ? 'primary' : null">arrow_upward</mat-icon></button>  -->
         <!-- Colored thumbs -->
-        <!-- <button mat-icon-button (click)="vote = (vote == 1) ? 0 : 1"><mat-icon [color]="(vote == 1) ? 'primary' : null">thumb_up</mat-icon></button>  -->
-        
+        <!-- <button mat-icon-button (click)="vote = (userVote == 1) ? 0 : 1"><mat-icon [color]="(userVote == 1) ? 'primary' : null">thumb_up</mat-icon></button>  -->
+
         <span> {{ post.votes }} </span>
-        
+
         <!-- Circle Arrow -->
-        <button mat-icon-button (click)="this.toggleVote(-1)"><mat-icon>{{ (vote == -1) ? "arrow_circle_down" : "arrow_downward"}}</mat-icon></button> 
+        <button mat-icon-button (click)="this.toggleVote(-1)">
+            <mat-icon>{{ (userVote == -1) ? "arrow_circle_down" : "arrow_downward"}}</mat-icon>
+        </button>
         <!-- Colored Arrow -->
-        <!-- <button mat-icon-button (click)="vote = (vote == -1) ? 0 : -1"><mat-icon [color]="(vote == -1) ? 'primary' : null">arrow_downward</mat-icon></button>  -->
+        <!-- <button mat-icon-button (click)="vote = (userVote == -1) ? 0 : -1"><mat-icon [color]="(userVote == -1) ? 'primary' : null">arrow_downward</mat-icon></button>  -->
         <!-- Colored thumbs -->
-        <!-- <button mat-icon-button (click)="vote = (vote == -1) ? 0 : -1"><mat-icon [color]="(vote == -1) ? 'primary' : null">thumb_down</mat-icon></button>  -->
+        <!-- <button mat-icon-button (click)="vote = (userVote == -1) ? 0 : -1"><mat-icon [color]="(userVote == -1) ? 'primary' : null">thumb_down</mat-icon></button>  -->
     </div>
     <mat-card-content class="postContent">
-        <mat-card-title>{{ post.title }} </mat-card-title>
-        <p> {{ post.body }} </p>
-        <!-- Vote: {{ vote }} -->
+        <mat-card-title *ngIf="(post.title != null) && (post.title.length > 0)"> {{ post.title }} </mat-card-title>
+        <p [innerHTML]="replaceNewLinesWithBreaks(post.body)"></p>
+
+        <!-- <p> voters {{ post.voters | json }}</p>
+        <p> voters[user] {{ post.voters[auth.currentUserId] }}</p>
+        <p> vote {{ userVote }}</p>
+        <p> in voters {{ post.voters["asd"] == undefined }}</p> -->
+
+        <mat-card-subtitle> Posted by {{ post.authorDisplayName }} {{ (post.postedTime == -1) ? "a few seconds ago" :
+            ((post.postedTime.seconds | amFromUnix) | amTimeAgo) }}</mat-card-subtitle>
     </mat-card-content>
 </mat-card>
-

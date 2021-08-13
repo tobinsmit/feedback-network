@@ -7,6 +7,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Observable, of } from 'rxjs'
 import { switchMap, map } from 'rxjs/operators'
 
+import { Post } from '../post.model'
 
 @Component({
   selector: 'app-course',
@@ -16,6 +17,8 @@ import { switchMap, map } from 'rxjs/operators'
 export class CourseComponent implements OnInit {
   postsLoaded: any;
   posts$: Observable<any[]>;
+  // posts$: any;
+  posts: Post[] = [];
 
   constructor(
     private afs: AngularFirestore,
@@ -31,16 +34,48 @@ export class CourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.postsLoaded = false;
+    this.afs.collection('MtrnPosts').snapshotChanges().subscribe((snapshots:any) => {
+      if (this.posts.length == 0) {
+        // First time
 
-    
-    // this.afs.collection("MtrnPosts", ref => ref.orderBy("votes", "desc").limit(1000)).snapshotChanges().subscribe(snap => {
-      // this.posts$ = snap;
-      // this.postsLoaded = true;
-      // console.log("postsLoaded");
-      // console.log(snap)
-    // });
+        // Append all to list
+        for (let snap of snapshots) {
+          const id = snap.payload.doc.id;
+          const data = snap.payload.doc.data();
+          const post = {...data, id}
+          this.posts.push(post)
+        }
 
+        // Sort
+        this.posts.sort((a,b) => (a.votes > b.votes) ? -1 : ((b.votes > a.votes) ? 1 : 0))
+
+      } else {
+        // Already loaded posts
+        
+        const existingPostIds = this.posts.map((post) => {return post.id})
+
+        // Iterate through posts
+        for (let snap of snapshots) {
+          const id = snap.payload.doc.id;
+          const data = snap.payload.doc.data();
+          const post = {...data, id}
+
+          console.log("checking if new post")
+          console.log("existingPostIds", existingPostIds)
+          console.log("id", id)
+          if (existingPostIds.includes(id)) {
+            console.log("yes")
+            // Replace post into ordered list
+            const idx = existingPostIds.indexOf(id)
+            this.posts[idx] = post
+
+          } else {
+            console.log("no")
+            // Add new post to end
+            this.posts.push(post)
+          }
+        }
+      }
+    })
   }
-
 }

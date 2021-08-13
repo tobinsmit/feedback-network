@@ -1,3 +1,11 @@
+// mat-card-title {
+//     margin-top: 16px;
+// }
+mat-card-subtitle {
+    margin-bottom: 4px;
+    margin-top: auto !important;
+}
+
 .post {
     margin-top: 24px;
     margin-bottom: 24px;
@@ -8,9 +16,9 @@
 }
 
 .postVoteCol {
-    width: 50px;
+    width: 45px;
     padding-top: 5px;
-    padding-bottom: 16px;
+    padding-bottom: 5px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,4 +33,8 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+}
+
+.postContent > p {
+    margin-bottom: 8px;
 }

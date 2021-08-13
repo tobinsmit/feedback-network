@@ -13,16 +13,30 @@
 
 <h1 mat-dialog-title> New Post </h1>
 <div mat-dialog-content>
-    <!-- <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill">
         <mat-label>Title</mat-label>
-        <input matInput [(ngModel)]="title">
-    </mat-form-field> -->
+        <input matInput [(ngModel)]="post.title" cdkFocusInitial>
+    </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Post</mat-label>
-        <textarea matInput [(ngModel)]="post.body" cdkFocusInitial cdkTextareaAutosize cdkAutosizeMinRows="3"></textarea>
+        <textarea matInput [(ngModel)]="post.body" cdkTextareaAutosize cdkAutosizeMinRows="3"></textarea>
     </mat-form-field>
+
+    
+    <ng-container *ngIf="showPreview">
+        <p>Preview:</p>
+        <app-post [post]="newPostDataToPostData(post)">
+        </app-post>
+    </ng-container>
+
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="post" color="primary">Post</button>
+    <ng-container *ngIf="!showPreview">
+        <button mat-button (click)="showPreview = true">Show Preview</button>
+    </ng-container>
+    <ng-container *ngIf="showPreview">
+        <button mat-button (click)="showPreview = false">Hide Preview</button>
+    </ng-container>
+    <button mat-button [mat-dialog-close]="post" color="primary" [disabled]="((post.title != null ? post.title.length : 0) + (post.body != null ? post.body.length : 0) < 5)">Post</button>
 </div>
