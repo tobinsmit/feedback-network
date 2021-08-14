@@ -46,7 +46,14 @@
         <p> vote {{ userVote }}</p>
         <p> in voters {{ post.voters["asd"] == undefined }}</p> -->
 
-        <mat-card-subtitle> Posted by {{ post.authorDisplayName }} {{ (post.postedTime == -1) ? "a few seconds ago" :
-            ((post.postedTime.seconds | amFromUnix) | amTimeAgo) }}</mat-card-subtitle>
+        <div class="postContentBottom">
+            <mat-card-subtitle>
+                Posted by
+                {{ (post.authorUid == auth.currentUserId) ? "you" : post.authorDisplayName }}
+                {{ (post.postedTime == -1) ? "a few seconds ago" : ((post.postedTime.seconds | amFromUnix) | amTimeAgo) }}
+                
+            </mat-card-subtitle>
+            <button mat-icon-button *ngIf="post.authorUid == auth.currentUserId" (click)="deleteMe()"><mat-icon color>delete_outline</mat-icon></button>
+        </div>
     </mat-card-content>
 </mat-card>

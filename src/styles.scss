@@ -10,3 +10,9 @@ body {
 mat-form-field {
     width: 100%;
 }
+
+.centeringDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

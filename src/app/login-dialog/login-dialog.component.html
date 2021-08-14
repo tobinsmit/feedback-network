@@ -1,0 +1,20 @@
+<h1 mat-dialog-title> Sign In </h1>
+<div mat-dialog-content>
+    <p>To sign into this course, you need the course password</p>
+    <mat-form-field appearance="fill">
+        <mat-label>Course Password</mat-label>
+        <input matInput type="password" [(ngModel)]="coursePassword" (click)="correctPassword = null" cdkFocusInitial [disabled]="!!correctPassword">
+    </mat-form-field>
+    <p *ngIf="correctPassword == false" style="color:red;">
+        Wrong password
+    </p>
+    <p *ngIf="correctPassword" style="color:green;">
+        Correct password
+    </p>
+    <button mat-button (click)="correctPassword = (coursePassword == 'gingerbeer')" *ngIf="!correctPassword">Check Course Password</button>
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="login()" [disabled]="!correctPassword"><i class="fa fa-google" style="margin-top: -2px;"> </i> Sign In</button>
+</div>

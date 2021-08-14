@@ -19,16 +19,16 @@
     </ng-container>
     <ng-template #loginButton>
         <!-- <button mat-flat-button color="primary" (click)="auth.microsoftSignIn()">Microsoft Sign In</button> -->
-        <button mat-stroked-button color="primary" (click)="auth.googleSignIn()"><i class="fa fa-google" style="margin-top: -2px;"> </i> Sign In</button>
+        <button mat-stroked-button color="primary" (click)="openLoginDialog()">Sign In</button>
     </ng-template>
 </mat-toolbar>
 
 <div class="container">
     <div class="centeringDiv">
-        <button mat-flat-button color="primary" (click)="openDialog()">New post</button>
+        <button mat-flat-button color="primary" (click)="openDialog()">New Post</button>
     </div>
     
-    <app-course></app-course>
+    <app-course (loginEvent)="openLoginDialog()"></app-course>
 </div>
 
 

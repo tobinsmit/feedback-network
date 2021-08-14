@@ -1,10 +1,6 @@
 // mat-card-title {
 //     margin-top: 16px;
 // }
-mat-card-subtitle {
-    margin-bottom: 4px;
-    margin-top: auto !important;
-}
 
 .post {
     margin-top: 24px;
@@ -37,4 +33,22 @@ mat-card-subtitle {
 
 .postContent > p {
     margin-bottom: 8px;
+}
+
+.postContentBottom {
+    margin-top: auto !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 20px;
+
+    mat-card-subtitle {
+        margin-bottom: 0;
+    }   
+
+    button:not(:hover) {
+        color: rgba(0,0,0,.26);
+    }
+
 }

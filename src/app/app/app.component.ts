@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/firestore'
 import { AuthService } from '../services/auth.service'
 import { NewPostDialogComponent } from '../new-post-dialog/new-post-dialog.component'
 import { NewPostData } from '../new-post-dialog/new-post-data.model'
+import { LoginDialogComponent } from '../login-dialog/login-dialog.component'
 import { Post } from '../post.model';
 
 // import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
@@ -29,6 +30,12 @@ export class AppComponent {
   }
   
   openDialog(): void {
+    // Require login
+    if (!this.auth.authenticated) {
+      this.openLoginDialog()
+      return
+    }
+    
     const dialogRef = this.dialog.open(NewPostDialogComponent, {
       maxWidth: '800px',
       width: '100%',
@@ -56,8 +63,11 @@ export class AppComponent {
     });
   }
 
-  requestLogin() {
-    // Show a log in pop up
+  openLoginDialog() {
+    const dialogRef = this.dialog.open(LoginDialogComponent, {
+      maxWidth: '400px',
+      width: '100%',
+    });
   }
 }
 

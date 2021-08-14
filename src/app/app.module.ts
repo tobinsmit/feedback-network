@@ -19,6 +19,7 @@ import { environment } from 'src/environments/environment';
 import { PostComponent } from './post/post.component';
 import { CourseComponent } from './course/course.component';
 import { NewPostDialogComponent } from './new-post-dialog/new-post-dialog.component';
+import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 
 // Test components
 // import { TestAddressFormComponent } from './test-address-form/test-address-form.component';
@@ -39,6 +40,7 @@ import { NewPostDialogComponent } from './new-post-dialog/new-post-dialog.compon
     PostComponent,
     CourseComponent,
     NewPostDialogComponent,
+    LoginDialogComponent,
     // TestAddressFormComponent,
     // TestDashComponent,
     // TestDragComponent,
