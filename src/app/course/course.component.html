@@ -1,3 +1,20 @@
-<ng-container *ngFor="let post of posts" >
+<mat-card class="intro">
+    <mat-card-content>
+        <h1 class="title">Welcome to the Feedback Network</h1>
+        <p>
+            This is a place for <b>constructive, collaborative, </b> and <b>non-anonymous</b> feedback. Students can share ideas,
+            feedback and suggestions and get recognition and support from other students. This is prototype platform and
+            is not fully developed but we hope it can still foster great community feedback.
+        </p>
+        
+    </mat-card-content>
+</mat-card>
+
+<div class="centeringDiv toolbar">
+    <button mat-flat-button color="primary" (click)="openNewPostDialog()">New Post</button>
+    <button mat-flat-button color="primary" (click)="openNewPostDialog()">New Post</button>
+</div>
+
+<ng-container *ngFor="let post of posts">
     <app-post [post]="post" (loginEvent)="loginEvent.emit()"></app-post>
 </ng-container>
