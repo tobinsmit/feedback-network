@@ -3,9 +3,10 @@ export interface Post{
     body: string | null,
     votes: number,
     voters: object,
-    id?: string | null,
+    id?: string | null, // null for post preview
     postedTime: any,
     authorDisplayName: string,
     authorUid: string,
-    approved: boolean | null
+    approved: true | false | null,
+    deleted?: true
 }

@@ -40,7 +40,12 @@ export class PostComponent implements OnInit {
       return
     }
 
-    if (this.post.id != null) {
+    if (this.post.id == null) {
+      // This means its is a post preview
+      return
+    }
+
+    if (!this.post.id != null) {
       const oldVote: number = this.userVote
       const newVote: number = (oldVote != toggleVote) ? toggleVote : 0
       var data = {
@@ -52,6 +57,11 @@ export class PostComponent implements OnInit {
   }
 
   deleteMe(): void {
+    if (this.post.id == null) {
+      // This means it is a preview post
+      return
+    }
+    
     if(confirm("Are you sure you want to delete this post? \nThis is not reversible")) {
       this.afs.doc("MtrnPosts/" + this.post.id).delete()
     }

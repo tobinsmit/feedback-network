@@ -16,6 +16,10 @@
 </mat-card> -->
 
 <mat-card class="post">
+    <div class="deletedOverlay" *ngIf="this.post.deleted">
+        <mat-icon color>delete_outline</mat-icon>
+        <p>This post has been deleted</p>
+    </div>
     <div class="postVoteCol">
         <!-- Circle Arrow -->
         <button mat-icon-button (click)="this.toggleVote(1)">
@@ -49,11 +53,11 @@
         <div class="postContentBottom">
             <mat-card-subtitle>
                 Posted by
-                {{ (post.authorUid == auth.currentUserId) ? "you" : post.authorDisplayName }}
+                {{ (post.authorUid == auth.currentUserId)  && (post.id != null) ? "you" : post.authorDisplayName }}
                 {{ (post.postedTime == -1) ? "a few seconds ago" : ((post.postedTime.seconds | amFromUnix) | amTimeAgo) }}
                 
             </mat-card-subtitle>
-            <button mat-icon-button *ngIf="post.authorUid == auth.currentUserId" (click)="deleteMe()"><mat-icon color>delete_outline</mat-icon></button>
+            <button mat-icon-button *ngIf="(post.authorUid == auth.currentUserId) && (post.id != null)" (click)="deleteMe()"><mat-icon color>delete_outline</mat-icon></button>
         </div>
     </mat-card-content>
 </mat-card>

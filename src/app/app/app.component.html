@@ -11,6 +11,7 @@
 
     <!-- Log in/out -->
     <ng-container *ngIf="auth.authenticated; else loginButton">
+        <span style="margin-right: 15px;" *ngIf="auth.currentUserDisplayName == 'Tobin Smit'">{{ auth.currentUserEmail }}</span>
         <span style="margin-right: 15px;">Hi {{ auth.currentUserDisplayName }}</span>
         <button mat-stroked-button color="primary" (click)="auth.signOut()">Sign Out</button>
         <!-- <button mat-icon-button matTooltip="Sign Out" matTooltipPosition="below" (click)="auth.signOut()">
@@ -23,12 +24,10 @@
     </ng-template>
 </mat-toolbar>
 
+<!-- <button mat-stroked-button color="primary" (click)="courseComponent.resortPosts()">reload</button> -->
+
 <div class="container">
-    <div class="centeringDiv">
-        <button mat-flat-button color="primary" (click)="openDialog()">New Post</button>
-    </div>
-    
-    <app-course (loginEvent)="openLoginDialog()"></app-course>
+    <app-course (loginEvent)="openLoginDialog()" [reloadEvent]="reloadEvent"></app-course>
 </div>
 
 

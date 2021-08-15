@@ -1,17 +1,34 @@
 <mat-card class="intro">
     <mat-card-content>
         <h1 class="title">Welcome to the Feedback Network</h1>
-        <p>
+        <!-- <p>
             This is a place for <b>constructive, collaborative, </b> and <b>non-anonymous</b> feedback. Students can share ideas,
             feedback and suggestions and get recognition and support from other students. This is prototype platform and
             is not fully developed but we hope it can still foster great community feedback.
+        </p> -->
+        <!-- <p> -->
+            <!-- Provide feedback in a collaborative environment to improve university courses for yourself and your peers. Share your  ideas, upvote and downvote current suggestions, and help create quality feedback in a team environment.  -->
+            <!-- This is a place to provide feedback in a collaborative environment to improve university courses for yourself and your peers. Share your ideas and feedback, up-vote and down-vote other students' posts, and help create quality feedback in a collaborative environment.  -->
+        <!-- </p> -->
+        <p>
+            This is a place for <b>constructive, collaborative, </b> and <b>non-anonymous</b> feedback to help improve university courses. Students can share ideas,
+            feedback and suggestions and get recognition and support from other students in the form of up-votes and down-votes. This is prototype platform and
+            is not fully developed but we hope it can still foster great community feedback.
         </p>
-        
     </mat-card-content>
 </mat-card>
 
-<div class="centeringDiv toolbar">
-    <button mat-flat-button color="primary" (click)="openNewPostDialog()">New Post</button>
+<div class="toolbar">
+    <mat-chip-list>
+        <mat-chip [selected]="(orderBy == 'Most Votes')" (click)="orderBy = 'Most Votes'; resortPosts()">Most Votes</mat-chip>
+        <mat-chip [selected]="(orderBy == 'Newest')" (click)="orderBy = 'Newest'; resortPosts()">Newest</mat-chip>
+        <mat-chip [selected]="(orderBy == 'Oldest')" (click)="orderBy = 'Oldest'; resortPosts()">Oldest</mat-chip>
+    </mat-chip-list>
+    <!-- <mat-button-toggle-group name="orderBy" aria-label="Font Style">
+        <mat-button-toggle value="votes">Most Votes</mat-button-toggle>
+        <mat-button-toggle value="newest">Newest</mat-button-toggle>
+        <mat-button-toggle value="oldest">Oldest</mat-button-toggle>
+      </mat-button-toggle-group> -->
     <button mat-flat-button color="primary" (click)="openNewPostDialog()">New Post</button>
 </div>
 

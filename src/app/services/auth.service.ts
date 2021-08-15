@@ -36,8 +36,12 @@ export class AuthService {
     return this.authenticated ? this.currentAuth.uid : '';
   }
 
-  get currentUserDisplayName(): any {
+  get currentUserDisplayName(): string {
     return this.authenticated ? this.currentAuth.displayName : null;
+  }
+
+  get currentUserEmail(): string {
+    return this.authenticated ? this.currentAuth.email : null;
   }
 
   async googleSignIn() {

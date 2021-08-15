@@ -18,14 +18,14 @@
         <input matInput [(ngModel)]="post.title" cdkFocusInitial>
     </mat-form-field>
     <mat-form-field appearance="fill">
-        <mat-label>Post</mat-label>
+        <mat-label>Body</mat-label>
         <textarea matInput [(ngModel)]="post.body" cdkTextareaAutosize cdkAutosizeMinRows="3"></textarea>
     </mat-form-field>
 
     
     <ng-container *ngIf="showPreview">
         <p>Preview:</p>
-        <app-post [post]="newPostDataToPostData(post)">
+        <app-post [post]="makePreviewData(post)">
         </app-post>
     </ng-container>
 
