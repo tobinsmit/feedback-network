@@ -23,6 +23,7 @@ export class CourseComponent implements OnInit {
   @Output() loginEvent = new EventEmitter();
 
   posts: Post[] = [];
+  newPosts: Post[] = [];
   lastPostsSnapshot: any;
   needToResortPosts = false;
   orderBy: 'Most Votes' | 'Newest' | 'Oldest' = 'Most Votes';
@@ -73,16 +74,27 @@ export class CourseComponent implements OnInit {
             this.posts[idx] = post
 
           } else {
-            // Add new post to end
-            this.posts.push(post)
+            // Add new post to end of new posts
+            const existingNewPostIds = this.newPosts.map((post) => {return post.id});
+            const idx = existingNewPostIds.indexOf(id)
+            if (idx == -1) {
+              // Post not in existing new posts
+              // Add to end
+              this.newPosts.push(post)
+            } else {
+              // Replace with new post data
+              this.newPosts[idx] = post
+            }
+            
           }
         }
 
         // Remove posts deleted by user
+        // Iterate through existingPostIds
         for (let id of existingPostIds) {
-          // Check if posts not in postDocs' ids
+          // Check if id not in postDocs' ids
           if (!postDocsIds.includes(id)) {
-            // Only remove if deleted by user
+            // Add deleted attribute to trigger overlay
             const idx = existingPostIds.indexOf(id)
             this.posts[idx].deleted = true
           }
@@ -93,6 +105,7 @@ export class CourseComponent implements OnInit {
 
   resortPosts() {
     this.posts = []
+    this.newPosts = []
 
     // Append all to list
     for (let postDoc of this.lastPostsSnapshot) {
@@ -143,10 +156,9 @@ export class CourseComponent implements OnInit {
           votes: 0
         }
 
-        const result = this.afs.collection('MtrnPosts').add(newPost)
-
-        this.needToResortPosts = true
-        
+        const result = this.afs.collection('MtrnPosts').add(newPost).then(() => {
+          this.needToResortPosts = true
+        })
       }
     });
   }

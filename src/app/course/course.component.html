@@ -7,31 +7,47 @@
             is not fully developed but we hope it can still foster great community feedback.
         </p> -->
         <!-- <p> -->
-            <!-- Provide feedback in a collaborative environment to improve university courses for yourself and your peers. Share your  ideas, upvote and downvote current suggestions, and help create quality feedback in a team environment.  -->
-            <!-- This is a place to provide feedback in a collaborative environment to improve university courses for yourself and your peers. Share your ideas and feedback, up-vote and down-vote other students' posts, and help create quality feedback in a collaborative environment.  -->
+        <!-- Provide feedback in a collaborative environment to improve university courses for yourself and your peers. Share your  ideas, upvote and downvote current suggestions, and help create quality feedback in a team environment.  -->
+        <!-- This is a place to provide feedback in a collaborative environment to improve university courses for yourself and your peers. Share your ideas and feedback, up-vote and down-vote other students' posts, and help create quality feedback in a collaborative environment.  -->
         <!-- </p> -->
         <p>
-            This is a place for <b>constructive, collaborative, </b> and <b>non-anonymous</b> feedback to help improve university courses. Students can share ideas,
-            feedback and suggestions and get recognition and support from other students in the form of up-votes and down-votes. This is prototype platform and
-            is not fully developed but we hope it can still foster great community feedback.
+            This is a place for <b>constructive, collaborative, </b> and <b>non-anonymous</b> feedback to help improve
+            university courses. Students can share ideas, feedback and suggestions and get recognition and support from
+            other students in the form of up-votes and down-votes. This is a prototype platform and is not fully
+            developed but we hope it can still foster great community feedback.
         </p>
     </mat-card-content>
 </mat-card>
 
 <div class="toolbar">
-    <mat-chip-list>
+    <!-- <mat-chip-list>
         <mat-chip [selected]="(orderBy == 'Most Votes')" (click)="orderBy = 'Most Votes'; resortPosts()">Most Votes</mat-chip>
         <mat-chip [selected]="(orderBy == 'Newest')" (click)="orderBy = 'Newest'; resortPosts()">Newest</mat-chip>
         <mat-chip [selected]="(orderBy == 'Oldest')" (click)="orderBy = 'Oldest'; resortPosts()">Oldest</mat-chip>
-    </mat-chip-list>
-    <!-- <mat-button-toggle-group name="orderBy" aria-label="Font Style">
-        <mat-button-toggle value="votes">Most Votes</mat-button-toggle>
-        <mat-button-toggle value="newest">Newest</mat-button-toggle>
-        <mat-button-toggle value="oldest">Oldest</mat-button-toggle>
-      </mat-button-toggle-group> -->
-    <button mat-flat-button color="primary" (click)="openNewPostDialog()">New Post</button>
+    </mat-chip-list> -->
+    <mat-card style="padding: 0;">
+        <mat-button-toggle-group [(ngModel)]="orderBy" (click)="resortPosts()" style="border-width: 0;">
+            <mat-button-toggle value="Most Votes">Most Votes</mat-button-toggle>
+            <mat-button-toggle value="Newest">Newest</mat-button-toggle>
+            <mat-button-toggle value="Oldest">Oldest</mat-button-toggle>
+        </mat-button-toggle-group>
+    </mat-card>
+
+    <button mat-raised-button color="primary" (click)="openNewPostDialog()">New Post</button>
 </div>
 
 <ng-container *ngFor="let post of posts">
     <app-post [post]="post" (loginEvent)="loginEvent.emit()"></app-post>
+</ng-container>
+
+<ng-container *ngIf="newPosts.length > 0">
+    <div class="divider">
+        <mat-divider></mat-divider>
+        <p>New posts <button mat-raised-button color="primary" (click)="resortPosts()">Reload</button> </p>
+        <mat-divider></mat-divider>
+    </div>
+
+    <ng-container *ngFor="let post of newPosts">
+        <app-post [post]="post" (loginEvent)="loginEvent.emit()"></app-post>
+    </ng-container>
 </ng-container>
