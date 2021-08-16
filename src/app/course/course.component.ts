@@ -1,14 +1,13 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
-import { AngularFireAuth } from '@angular/fire/auth'
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore'
+import { AngularFirestore } from '@angular/fire/firestore'
 import firebase from 'firebase/app';
 
 import { Observable, of } from 'rxjs'
 import { switchMap, map } from 'rxjs/operators'
 
-import { Post } from '../post.model'
+import { Post } from '../post/post.model'
 import { AuthService } from '../services/auth.service';
 import { NewPostDialogComponent } from '../new-post-dialog/new-post-dialog.component'
 import { NewPostData } from '../new-post-dialog/new-post-data.model'
@@ -59,6 +58,7 @@ export class CourseComponent implements OnInit {
         // Already loaded posts
 
         const existingPostIds = this.posts.map((post) => { return post.id })
+        const existingNewPostIds = this.newPosts.map((post) => {return post.id});
         var postDocsIds = []
 
         // Iterate through posts
@@ -75,7 +75,6 @@ export class CourseComponent implements OnInit {
 
           } else {
             // Add new post to end of new posts
-            const existingNewPostIds = this.newPosts.map((post) => {return post.id});
             const idx = existingNewPostIds.indexOf(id)
             if (idx == -1) {
               // Post not in existing new posts
@@ -97,6 +96,15 @@ export class CourseComponent implements OnInit {
             // Add deleted attribute to trigger overlay
             const idx = existingPostIds.indexOf(id)
             this.posts[idx].deleted = true
+          }
+        }
+        // Iterate through existingNewPostIds
+        for (let id of existingNewPostIds) {
+          // Check if id not in postDocs' ids
+          if (!postDocsIds.includes(id)) {
+            // Add deleted attribute to trigger overlay
+            const idx = existingNewPostIds.indexOf(id)
+            this.newPosts[idx].deleted = true
           }
         }
       }

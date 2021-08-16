@@ -7,7 +7,7 @@ import { AngularFirestore } from '@angular/fire/firestore'
 import { AuthService } from '../services/auth.service'
 import { CourseComponent } from '../course/course.component'
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component'
-import { Post } from '../post.model';
+import { Post } from '../post/post.model';
 
 // import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 

@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
 
 import { NewPostData } from './new-post-data.model'
-import { Post } from '../post.model'
+import { Post } from '../post/post.model'
 import { PostComponent } from '../post/post.component';
 @Component({
   selector: 'app-new-post-dialog',
