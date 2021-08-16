@@ -4,8 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AngularFirestore } from '@angular/fire/firestore'
 import firebase from 'firebase/app';
 
-import { Observable, of } from 'rxjs'
-import { switchMap, map } from 'rxjs/operators'
+// import { Observable, of } from 'rxjs'
+// import { switchMap, map } from 'rxjs/operators'
 
 import { Post } from '../post/post.model'
 import { AuthService } from '../services/auth.service';

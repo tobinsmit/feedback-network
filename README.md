@@ -10,6 +10,8 @@
 - [x] Trigger refresh of post list on using dialog and sorters
 - [x] Get Molly to review intro at the top of the course page
 - [x] Make pretty
+- [ ] Add Terms and Conditions
+- [x] Deploy
 
 ## To Do for polished product
 - [ ] Rebuild for multiple courses
@@ -18,6 +20,8 @@
 - [ ] Handle viewing posts deleted by other users better or at least get approval
 - [ ] Allow users to hide deleted posts
 - [ ] Add course sort option as route param
+- [ ] Make intro banner dismissible (save state to firestore)
+- [ ] Make enter in course password field trigger check password
 # Generated notes:
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.0.
